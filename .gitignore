@@ -1,3 +1,13 @@
+# Project-specific ignores
+installers/
+testenv/
+credentials.json
+token.pickle
+credentials.enc
+credentials.key
+*.iss  # For your Inno Setup script
+*.dmg  # For macOS builds
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
