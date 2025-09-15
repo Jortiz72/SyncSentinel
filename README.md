@@ -1,6 +1,6 @@
 # SyncSentinel - Media Asset Watcher
 
-![CI](https://github.com/your-username/your-repo/workflows/CI/badge.svg)
+![SyncSentinel Logo](syncsentinel_icon.png)
 
 A comprehensive tool for monitoring and parsing FreeFileSync log files with automated CSV export and optional Google Sheets integration.
 
