@@ -1,0 +1,7 @@
+watchdog==3.0.0
+pillow==10.1.0
+pystray==0.19.5
+google-api-python-client==2.108.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+cryptography==45.0.7
