@@ -1,6 +1,6 @@
 # SyncSentinel - Media Asset Watcher
 
-![SyncSentinel Logo](syncsentinel_icon.png)
+<img src="syncsentinel_icon.png" alt="SyncSentinel Logo" width="200">
 
 A comprehensive tool for monitoring and parsing FreeFileSync log files with automated CSV export and optional Google Sheets integration.
 
