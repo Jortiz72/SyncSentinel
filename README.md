@@ -20,7 +20,7 @@ SyncSentinel now provides a **secure, automated setup process** that handles eve
 
 1. **Launch the application**:
    ```bash
-   python main.py
+   python -m syncsentinel.main
    ```
 
 2. **Access Google Sheets**:
@@ -84,7 +84,9 @@ syncsentinel/
 ├── handler.py               # File system event handling
 ├── gui_utils.py             # GUI-specific helper functions
 ├── google_sheets.py         # Google Sheets API integration
+tests/
 ├── tests.py                 # Unit and integration tests
+scripts/
 ├── build.py                 # PyInstaller build script
 ├── requirements.txt         # Python dependencies
 └── README.md               # This file
@@ -133,7 +135,7 @@ The uninstaller provides an option to remove this user data during uninstallatio
 
 1. **Run the application**:
    ```bash
-   python main.py
+   python -m syncsentinel.main
    ```
 
 2. **Configure paths**:
@@ -203,7 +205,7 @@ Creating file &quot;C:\Dest\VideoFile\Project\test.mov&quot;
 Run the comprehensive test suite:
 
 ```bash
-python -m unittest tests.py
+python -m unittest tests.tests
 ```
 
 Tests include:
@@ -226,7 +228,7 @@ pip install pyinstaller
 
 Run the build script:
 ```bash
-python build.py
+python scripts/build.py
 ```
 
 This will:
@@ -238,14 +240,14 @@ This will:
 
 You can also build manually:
 ```bash
-pyinstaller --onefile --windowed --name=SyncSentinel --icon=syncsentinel_icon.png --hidden-import=pystray --hidden-import=PIL --hidden-import=PIL.Image --hidden-import=tkinter --hidden-import=tkinter.filedialog --hidden-import=tkinter.scrolledtext --hidden-import=tkinter.messagebox --hidden-import=win32api --hidden-import=win32con --hidden-import=win32gui --hidden-import=win32service --hidden-import=pywintypes --add-data syncsentinel_icon.png;. main.py
+pyinstaller --onefile --windowed --name=SyncSentinel --icon=syncsentinel_icon.png --hidden-import=pystray --hidden-import=PIL --hidden-import=PIL.Image --hidden-import=tkinter --hidden-import=tkinter.filedialog --hidden-import=tkinter.scrolledtext --hidden-import=tkinter.messagebox --hidden-import=win32api --hidden-import=win32con --hidden-import=win32gui --hidden-import=win32service --hidden-import=pywintypes --add-data syncsentinel_icon.png;. syncsentinel/main.py
 ```
 
 ### Building with Installer
 
 To build both executable and installer:
 ```bash
-python build.py --installer
+python scripts/build.py --installer
 ```
 
 #### Windows Installer (Inno Setup)
@@ -314,11 +316,11 @@ The build script handles platform-specific data inclusion automatically.
 ## Architecture
 
 ### Modular Design
-- **main.py**: GUI and application lifecycle
-- **parser.py**: Core parsing logic and data processing
-- **handler.py**: File system monitoring and event handling
-- **gui_utils.py**: GUI-specific utilities and callbacks
-- **google_sheets.py**: Google API integration
+- **syncsentinel/main.py**: GUI and application lifecycle
+- **syncsentinel/parser.py**: Core parsing logic and data processing
+- **syncsentinel/handler.py**: File system monitoring and event handling
+- **syncsentinel/gui_utils.py**: GUI-specific utilities and callbacks
+- **syncsentinel/google_sheets.py**: Google API integration
 
 ### Key Classes
 - `MediaAssetWatcherGUI`: Main GUI application
