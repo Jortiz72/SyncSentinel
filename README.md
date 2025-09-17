@@ -234,13 +234,13 @@ python scripts/build.py
 This will:
 - Create a `SyncSentinel.spec` file
 - Build a standalone executable in the `dist` folder
-- Use the icon `syncsentinel_icon.png` if present
+- Use the icon `assets/syncsentinel_icon.png` if present
 
 ### Manual Build
 
 You can also build manually:
 ```bash
-pyinstaller --onefile --windowed --name=SyncSentinel --icon=syncsentinel_icon.png --hidden-import=pystray --hidden-import=PIL --hidden-import=PIL.Image --hidden-import=tkinter --hidden-import=tkinter.filedialog --hidden-import=tkinter.scrolledtext --hidden-import=tkinter.messagebox --hidden-import=win32api --hidden-import=win32con --hidden-import=win32gui --hidden-import=win32service --hidden-import=pywintypes --add-data syncsentinel_icon.png;. syncsentinel/main.py
+pyinstaller --onefile --windowed --name=SyncSentinel --icon=assets/syncsentinel_icon.png --hidden-import=pystray --hidden-import=PIL --hidden-import=PIL.Image --hidden-import=tkinter --hidden-import=tkinter.filedialog --hidden-import=tkinter.scrolledtext --hidden-import=tkinter.messagebox --hidden-import=win32api --hidden-import=win32con --hidden-import=win32gui --hidden-import=win32service --hidden-import=pywintypes --add-data assets/syncsentinel_icon.png;. syncsentinel/main.py
 ```
 
 ### Building with Installer
@@ -289,7 +289,7 @@ The build script handles platform-specific data inclusion automatically.
 
 ### Icon Handling
 
-- Place `syncsentinel_icon.png` in the project root
+- Place `assets/syncsentinel_icon.png` in the `assets/` folder
 - The build script will automatically convert PNG to ICO (Windows) or ICNS (macOS) if they don't exist
 - PyInstaller can use PNG files, but for better results:
   - Windows: Convert to `.ico` format for installer

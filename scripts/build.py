@@ -20,9 +20,9 @@ except ImportError:
 def convert_icon_formats():
     """Convert syncsentinel_icon.png to platform-specific formats if they don't exist."""
     
-    png_path = 'syncsentinel_icon.png'
+    png_path = 'assets/syncsentinel_icon.png'
     if not os.path.exists(png_path):
-        print("syncsentinel_icon.png not found, skipping icon conversion")
+        print("assets/syncsentinel_icon.png not found, skipping icon conversion")
         return
     
     try:
@@ -35,7 +35,7 @@ def convert_icon_formats():
     current_platform = platform.system()
     
     if current_platform == 'Windows':
-        ico_path = 'syncsentinel_icon.ico'
+        ico_path = 'assets/syncsentinel_icon.ico'
         if not os.path.exists(ico_path):
             try:
                 img = Image.open(png_path)
@@ -44,7 +44,7 @@ def convert_icon_formats():
             except Exception as e:
                 print(f"Error converting to ICO: {e}")
     elif current_platform == 'Darwin':  # macOS
-        icns_path = 'syncsentinel_icon.icns'
+        icns_path = 'assets/syncsentinel_icon.icns'
         if not os.path.exists(icns_path):
             try:
                 img = Image.open(png_path)
@@ -65,7 +65,7 @@ def build_executable():
         '--onefile',
         '--windowed',
         '--name', f'SyncSentinel-{VERSION}',
-        '--icon=syncsentinel_icon.ico',
+        '--icon=assets/syncsentinel_icon.ico',
         '--hidden-import=pystray',
         '--hidden-import=PIL',
         '--hidden-import=PIL.Image',
@@ -97,21 +97,21 @@ def build_executable():
     if current_platform == 'Windows':
         # Windows-specific options
         cmd.extend([
-            '--add-data', 'syncsentinel_icon.ico;.',
-            '--add-data', 'syncsentinel_icon.png;.',
+            '--add-data', 'assets/syncsentinel_icon.ico;.',
+            '--add-data', 'assets/syncsentinel_icon.png;.',
         ])
     elif current_platform == 'Darwin':  # macOS
         # macOS-specific options
         cmd.extend([
-            '--add-data', 'syncsentinel_icon.ico:.',
-            '--add-data', 'syncsentinel_icon.png:.',
+            '--add-data', 'assets/syncsentinel_icon.ico:.',
+            '--add-data', 'assets/syncsentinel_icon.png:.',
         ])
     else:
         print(f"Unsupported platform: {current_platform}")
         return False
     
     # Add the main script
-    cmd.append('main.py')
+    cmd.append('syncsentinel/main.py')
     
     print("Building SyncSentinel executable...")
     print(f"Command: {' '.join(cmd)}")
@@ -145,10 +145,10 @@ def create_spec_file():
 block_cipher = None
 
 a = Analysis(
-    ['main.py'],
+    ['syncsentinel/main.py'],
     pathex=['.'],
     binaries=[],
-    datas=[('syncsentinel_icon.ico', '.'), ('syncsentinel_icon.png', '.')],
+    datas=[('assets/syncsentinel_icon.ico', '.'), ('assets/syncsentinel_icon.png', '.')],
     hiddenimports=[
         'watchdog.events',
         'watchdog.observers',
@@ -211,7 +211,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='syncsentinel_icon.ico',
+    icon='assets/syncsentinel_icon.ico',
 )
 '''
     
@@ -226,15 +226,15 @@ def create_inno_setup_iss():
     # Convert PNG to ICO if needed
     try:
         from PIL import Image
-        ico_path = 'syncsentinel_icon.ico'
-        png_path = 'syncsentinel_icon.png'
+        ico_path = 'assets/syncsentinel_icon.ico'
+        png_path = 'assets/syncsentinel_icon.png'
         
         if not os.path.exists(ico_path) and os.path.exists(png_path):
             img = Image.open(png_path)
             img.save(ico_path, format='ICO', sizes=[(16,16), (32,32), (48,48), (64,64), (256,256)])
-            print("Converted syncsentinel_icon.png to syncsentinel_icon.ico")
+            print("Converted assets/syncsentinel_icon.png to assets/syncsentinel_icon.ico")
         elif not os.path.exists(ico_path):
-            print("Warning: Neither syncsentinel_icon.ico nor syncsentinel_icon.png found")
+            print("Warning: Neither assets/syncsentinel_icon.ico nor assets/syncsentinel_icon.png found")
     except ImportError:
         print("Pillow not installed. Install with: pip install pillow")
         print("Using PNG icon for installer (ICO recommended for better compatibility)")
@@ -264,8 +264,8 @@ OutputBaseFilename=SyncSentinel-{VERSION}-Installer
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
-SetupIconFile=syncsentinel_icon.ico
-UninstallDisplayIcon={{app}}\\syncsentinel_icon.ico
+SetupIconFile=assets/syncsentinel_icon.ico
+UninstallDisplayIcon={{app}}\\assets\\syncsentinel_icon.ico
 UninstallDisplayName=SyncSentinel v{VERSION}
 VersionInfoVersion={VERSION}
 VersionInfoProductVersion={VERSION}
@@ -280,12 +280,12 @@ Name: "startmenuicon"; Description: "Create Start Menu icon"; GroupDescription: 
 
 [Files]
 Source: "dist\\SyncSentinel-{VERSION}.exe"; DestDir: "{{app}}"; Flags: ignoreversion
-Source: "syncsentinel_icon.ico"; DestDir: "{{app}}"; Flags: ignoreversion
-Source: "syncsentinel_icon.png"; DestDir: "{{app}}"; Flags: ignoreversion
+Source: "assets/syncsentinel_icon.ico"; DestDir: "{{app}}"; Flags: ignoreversion
+Source: "assets/syncsentinel_icon.png"; DestDir: "{{app}}"; Flags: ignoreversion
 
 [Icons]
-Name: "{{group}}\\SyncSentinel"; Filename: "{{app}}\\SyncSentinel-{VERSION}.exe"; IconFilename: "{{app}}\\syncsentinel_icon.ico"; Tasks: startmenuicon
-Name: "{{commondesktop}}\\SyncSentinel"; Filename: "{{app}}\\SyncSentinel-{VERSION}.exe"; IconFilename: "{{app}}\\syncsentinel_icon.ico"; Tasks: desktopicon
+Name: "{{group}}\\SyncSentinel"; Filename: "{{app}}\\SyncSentinel-{VERSION}.exe"; IconFilename: "{{app}}\\assets\\syncsentinel_icon.ico"; Tasks: startmenuicon
+Name: "{{commondesktop}}\\SyncSentinel"; Filename: "{{app}}\\SyncSentinel-{VERSION}.exe"; IconFilename: "{{app}}\\assets\\syncsentinel_icon.ico"; Tasks: desktopicon
 
 [Run]
 Filename: "{{app}}\\SyncSentinel-{VERSION}.exe"; Description: "{{cm:LaunchProgram,SyncSentinel}}"; Flags: nowait postinstall skipifsilent
@@ -383,8 +383,8 @@ def build_mac_installer():
     # Copy executable and icon
     import shutil
     shutil.copy('dist/SyncSentinel', f'{app_folder}/SyncSentinel')
-    if os.path.exists('syncsentinel_icon.png'):
-        shutil.copy('syncsentinel_icon.png', f'{app_folder}/')
+    if os.path.exists('assets/syncsentinel_icon.png'):
+        shutil.copy('assets/syncsentinel_icon.png', f'{app_folder}/')
     
     # Make executable
     os.chmod(f'{app_folder}/SyncSentinel', 0o755)
@@ -393,7 +393,7 @@ def build_mac_installer():
     cmd = [
         'create-dmg',
         '--volname', 'SyncSentinel',
-        '--volicon', 'syncsentinel_icon.png' if os.path.exists('syncsentinel_icon.png') else '',
+        '--volicon', 'assets/syncsentinel_icon.png' if os.path.exists('assets/syncsentinel_icon.png') else '',
         '--window-pos', '200', '120',
         '--window-size', '800', '400',
         '--icon-size', '100',
@@ -405,9 +405,9 @@ def build_mac_installer():
     ]
     
     # Remove empty volicon if no icon
-    if not os.path.exists('syncsentinel_icon.png'):
+    if not os.path.exists('assets/syncsentinel_icon.png'):
         cmd.remove('--volicon')
-        cmd.remove('syncsentinel_icon.png')
+        cmd.remove('assets/syncsentinel_icon.png')
     
     print("Building macOS DMG installer...")
     print(f"Command: {' '.join(cmd)}")
@@ -454,8 +454,8 @@ def main():
         sys.exit(1)
     
     # Check if icon exists
-    if not os.path.exists('syncsentinel_icon.ico'):
-        print("Warning: syncsentinel_icon.ico not found in project root")
+    if not os.path.exists('assets/syncsentinel_icon.ico'):
+        print("Warning: assets/syncsentinel_icon.ico not found in project root")
         print("The build will continue but without an icon")
     
     # Convert icon formats if needed
