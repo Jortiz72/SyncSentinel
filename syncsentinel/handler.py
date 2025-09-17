@@ -46,7 +46,7 @@ class LogFileHandler(FileSystemEventHandler):
                 # Check if file is ready to be read (not still being written)
                 time.sleep(0.5)  # Wait a bit for file to be fully written
 
-                from parser import parse_sync_log, append_to_csv
+                from syncsentinel.parser import parse_sync_log, append_to_csv
                 parsed_data = parse_sync_log(event.src_path)
                 self.log_callback(f"Successfully parsed log file: {len(parsed_data.get('sync_operations', []))} operations found")
 

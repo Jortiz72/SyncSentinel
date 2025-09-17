@@ -15,13 +15,13 @@ import tkinter as tk
 from tkinter import filedialog, scrolledtext, messagebox
 import tkinter.ttk as ttk
 
-from parser import parse_sync_log, append_to_csv
-from handler import LogFileHandler
-from gui_utils import (
+from syncsentinel.parser import parse_sync_log, append_to_csv
+from syncsentinel.handler import LogFileHandler
+from syncsentinel.gui_utils import (
     store_last_parsed, log_message, copy_last_log,
     setup_tray_icon, show_window, quit_app, minimize_to_tray
 )
-from google_sheets import GoogleSheetsManager
+from syncsentinel.google_sheets import GoogleSheetsManager
 
 # Version information
 VERSION = "0.9.0"

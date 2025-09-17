@@ -13,7 +13,7 @@ import argparse
 
 # Import version from main module
 try:
-    from main import VERSION
+    from syncsentinel.main import VERSION
 except ImportError:
     VERSION = "0.9.0"  # Fallback version
 

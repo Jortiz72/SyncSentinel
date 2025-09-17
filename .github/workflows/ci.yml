@@ -25,9 +25,9 @@ jobs:
         pip install coverage
 
     - name: Run tests
-      run: python -m unittest tests.py
+      run: python -m unittest tests.tests
 
     - name: Run tests with coverage
       run: |
-        coverage run -m unittest tests.py
+        coverage run -m unittest tests.tests
         coverage report

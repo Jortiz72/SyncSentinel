@@ -31,7 +31,7 @@ def store_last_parsed(gui_instance, parsed_data):
         print(f"store_last_parsed called with date: {parsed_data.get('date', 'NO_DATE')}")
         print(f"Operations found: {len(parsed_data.get('sync_operations', []))}")
 
-        from parser import extract_unique_files
+        from syncsentinel.parser import extract_unique_files
         unique_files = extract_unique_files(parsed_data)
 
         gui_instance.last_parsed_data = unique_files

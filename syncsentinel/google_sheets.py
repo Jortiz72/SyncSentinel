@@ -238,7 +238,7 @@ class GoogleSheetsManager:
                     return False, "Failed to authenticate with Google Sheets"
 
             # Extract data for upload
-            from parser import extract_unique_files
+            from syncsentinel.parser import extract_unique_files
             unique_files = extract_unique_files(data)
 
             if not unique_files:

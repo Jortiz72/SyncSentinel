@@ -11,18 +11,18 @@ from unittest.mock import Mock, patch, MagicMock
 
 # Import modules - adjust based on how the package is structured
 try:
-    from parser import parse_sync_log, append_to_csv, get_file_type, extract_unique_files
-    from handler import LogFileHandler
-    from main import MediaAssetWatcherGUI
-    from google_sheets import GoogleSheetsManager
+    from syncsentinel.parser import parse_sync_log, append_to_csv, get_file_type, extract_unique_files
+    from syncsentinel.handler import LogFileHandler
+    from syncsentinel.main import MediaAssetWatcherGUI
+    from syncsentinel.google_sheets import GoogleSheetsManager
 except ImportError:
     # Fallback for when running tests directly
     import sys
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-    from parser import parse_sync_log, append_to_csv, get_file_type, extract_unique_files
-    from handler import LogFileHandler
-    from main import MediaAssetWatcherGUI
-    from google_sheets import GoogleSheetsManager
+    from syncsentinel.parser import parse_sync_log, append_to_csv, get_file_type, extract_unique_files
+    from syncsentinel.handler import LogFileHandler
+    from syncsentinel.main import MediaAssetWatcherGUI
+    from syncsentinel.google_sheets import GoogleSheetsManager
 
 
 class TestParser(unittest.TestCase):
@@ -210,9 +210,9 @@ class TestHandler(unittest.TestCase):
         self.sheets_callback = Mock()
         self.handler = LogFileHandler('test.csv', self.log_callback, self.store_callback, self.sheets_callback, prepend=False, add_breaks=False)
 
-    @patch('handler.time.sleep')
-    @patch('parser.parse_sync_log')
-    @patch('parser.append_to_csv')
+    @patch('syncsentinel.handler.time.sleep')
+    @patch('syncsentinel.parser.parse_sync_log')
+    @patch('syncsentinel.parser.append_to_csv')
     def test_on_created_log_file(self, mock_append, mock_parse, mock_sleep):
         """Test handling of new log file creation."""
         # Mock the file event
